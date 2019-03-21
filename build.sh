@@ -5,8 +5,8 @@ set -e
 # lets us make sure the tags don't change on us.
 DUMB_INIT_TAG=v1.0.0
 DUMB_INIT_HASH=a9eadb580c0d234fc4090c1bf3f19f8d87bff76b
-GOSU_TAG=1.7
-GOSU_HASH=6908f86c7e0bf676b27b9237c41ca40719d4b9cb
+GOSU_TAG=1.11armv7
+GOSU_HASH=eb2f661a7daf5b6fa02c76b392e7a61b9de426b3
 
 # Get the version from the command line.
 VERSION=$1
