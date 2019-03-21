@@ -5,3 +5,4 @@ RUN apt-get update -y && \
         build-essential  \
         ca-certificates \
         git
+        
