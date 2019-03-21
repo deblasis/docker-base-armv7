@@ -21,12 +21,6 @@ mkdir -p pkg/dist
 mkdir -p pkg/build
 mkdir -p pkg/rootfs/bin
 
-# Generate the tag.
-if [ -z $NOTAG ]; then
-  git commit --allow-empty -a --gpg-sign=348FFC4C -m "Release v$VERSION"
-  git tag -a -m "Version $VERSION" -s -u 348FFC4C "v${VERSION}" master
-fi
-
 # Create the Debian build box. We don't use this to package anything
 # directly, but it's used as a scratch build environment.
 docker build -t hashicorp/builder-debian images/builder-debian
@@ -45,7 +39,7 @@ popd
 cp pkg/build/dumb-init/dumb-init pkg/rootfs/bin
 
 # Build gosu.
-git clone -b "$GOSU_TAG" https://github.com/tianon/gosu.git pkg/build/gosu
+git clone -b "$GOSU_TAG" https://github.com/deblasis/gosu.git pkg/build/gosu
 pushd pkg/build/gosu
 if $(git show-ref --verify refs/tags/${GOSU_TAG} | grep --quiet "$GOSU_HASH") ; then
     echo "Verified gosu git repository state"
@@ -56,11 +50,11 @@ fi
 docker build --no-cache --pull -t gosu .
 docker run --rm gosu bash -c 'cd /go/bin && tar -c gosu*' | tar -xv
 popd
-cp pkg/build/gosu/gosu-amd64 pkg/rootfs/bin/gosu
+cp pkg/build/gosu/gosu-armv7 pkg/rootfs/bin/gosu
 
 # Prep the release.
 pushd pkg/rootfs
-zip -r ../dist/docker-base_${VERSION}_linux_amd64.zip *
+zip -r ../dist/docker-base_${VERSION}_linux_armv7.zip *
 popd
 pushd pkg/dist
 shasum -a256 * > ./docker-base_${VERSION}_SHA256SUMS
