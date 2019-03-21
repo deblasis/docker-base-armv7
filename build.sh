@@ -48,7 +48,7 @@ else
     exit 1
 fi
 docker build --no-cache --pull -t gosu .
-docker run --rm gosu bash -c 'cd /go/bin && tar -c gosu*' | tar -xv
+docker run --rm gosu sh -c 'cd /go/bin && tar -c gosu*' | tar -xv
 popd
 cp pkg/build/gosu/gosu-armv7 pkg/rootfs/bin/gosu
 
