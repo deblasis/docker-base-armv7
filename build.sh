@@ -6,7 +6,7 @@ set -e
 DUMB_INIT_TAG=v1.0.0
 DUMB_INIT_HASH=a9eadb580c0d234fc4090c1bf3f19f8d87bff76b
 GOSU_TAG=1.11armv7
-GOSU_HASH=eb2f661a7daf5b6fa02c76b392e7a61b9de426b3
+GOSU_HASH=93e2ea8c79b114f46dfafb525a0126d61dc8b686
 
 # Get the version from the command line.
 VERSION=$1
